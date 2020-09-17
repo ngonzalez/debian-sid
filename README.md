@@ -1,2 +1,21 @@
-# debian-sid
-Dockerfile for debian sid
+```
+docker build github.com/ngonzalez/debian-sid -t debian \
+   --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" \
+   --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)"
+```
+
+```
+docker run -it -p 22:22 debian:latest
+```
+
+```
+docker exec -it <container_name> /bin/bash
+```
+
+```
+docker inspect -f "{{ .NetworkSettings.IPAddress }}" <container_name>
+```
+
+```
+docker system prune -a
+```
