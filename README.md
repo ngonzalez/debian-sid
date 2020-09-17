@@ -5,7 +5,10 @@ docker build github.com/ngonzalez/debian-sid -t debian \
 ```
 
 ```
-docker run -it -p 22:22 debian:latest
+docker run -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+               --cap-add SYS_ADMIN \
+               -p 22:22 \
+               debian:latest
 ```
 
 ```

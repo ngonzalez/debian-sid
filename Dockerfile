@@ -8,12 +8,20 @@ RUN apt-get dist-upgrade -yq
 # env
 ENV DEBIAN_FRONTEND noninteractive
 ENV RUNLEVEL 1
-ENV TERM xterm
+ENV TERM xterm-256color
 
 # debconf
 RUN apt-get install -yq debconf dialog libreadline8 libreadline-dev
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN dpkg-reconfigure debconf
+
+# systemd
+RUN apt-get install -yq systemd systemd-sysv
+FROM debian:${TAG}
+COPY --from=0 / /
+ENV container docker
+STOPSIGNAL SIGRTMIN+3
+VOLUME [ "/sys/fs/cgroup", "/run", "/run/lock" ]
 
 # locales
 RUN apt-get install -yq locales
