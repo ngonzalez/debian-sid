@@ -104,11 +104,11 @@ CMD [ ". /etc/profile.d/rbenv.sh" ]
 
 # redis
 RUN apt-get install -yq redis-server
-RUN curl https://git.io/JURWX -o /etc/redis/redis.conf
+RUN curl -fsSL https://git.io/JURWX -o /etc/redis/redis.conf
 
 # PostgreSQL
-RUN apt-get install -yq postgresql-9.6
-RUN echo "host all all 0.0.0.0/0 trust" >> /etc/postgresql/9.6/main/pg_hba.conf
+RUN apt-get install -yq postgresql-12
+RUN echo "host all all 0.0.0.0/0 trust" >> /etc/postgresql/12/main/pg_hba.conf
 
 # system init
 CMD [ "/sbin/init" ]
