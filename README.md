@@ -8,7 +8,7 @@ docker network create \
 ```
 
 ```
-docker build ~/Sites/debian-sid -t debian-sid \
+docker build github.com/ngonzalez/debian-sid -t debian-sid \
     --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" \
     --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)"
 ```
