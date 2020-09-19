@@ -87,31 +87,14 @@ RUN cp /home/$APP_USER/.ssh/id_host.pub /home/$APP_USER/.ssh/authorized_keys
 
 RUN chown -R $APP_USER: /home/$APP_USER/.ssh
 
+# ruby
+RUN apt-get install -yq ruby
+
 # git
 RUN apt-get install -yq git-core
 RUN git config --global core.editor vim
 RUN git config --global core.pager less
 RUN curl -fsSL https://git.io/JURsx -o /home/$APP_USER/.gitconfig
-RUN mkdir /usr/local/git
-RUN chown $APP_USER: /usr/local/git
-RUN runuser -l $APP_USER -c "git clone git@github.com:git/git.git /usr/local/git &>/dev/null"
-RUN apt-get install -yq cmake
-RUN cd /usr/local/git/contrib/diff-highlight && make
-RUN cp -r /usr/local/git/contrib/diff-highlight /usr/share/git-core/contrib/diff-highlight
-
-# rbenv
-RUN mkdir /usr/local/rbenv
-RUN chown $APP_USER: /usr/local/rbenv
-RUN runuser -l $APP_USER -c "git clone git@github.com:rbenv/rbenv.git /usr/local/rbenv &>/dev/null"
-RUN runuser -l $APP_USER -c "git clone git@github.com:rbenv/ruby-build.git /usr/local/rbenv/plugins/ruby-build &>/dev/null"
-RUN chmod 755 /usr/local/rbenv/plugins/ruby-build/install.sh
-RUN runuser -l $APP_USER -c "/usr/local/rbenv/plugins/ruby-build/install.sh"
-RUN touch /etc/profile.d/rbenv.sh
-RUN echo "export PATH=\"/usr/local/rbenv/bin:\$PATH\"" >> /etc/profile.d/rbenv.sh
-RUN echo "eval \"\$(rbenv init -)\"" >> /etc/profile.d/rbenv.sh
-RUN apt-get install -yq bzip2 zlib1g-dev
-RUN rbenv install 2.7.1
-RUN rbenv global 2.7.1
 
 # redis
 RUN apt-get install -yq redis-server
