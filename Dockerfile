@@ -104,11 +104,12 @@ RUN mkdir /usr/local/rbenv
 RUN chown $APP_USER: /usr/local/rbenv
 RUN runuser -l $APP_USER -c "git clone git@github.com:rbenv/rbenv.git /usr/local/rbenv &>/dev/null"
 RUN runuser -l $APP_USER -c "git clone git@github.com:rbenv/ruby-build.git /usr/local/rbenv/plugins/ruby-build &>/dev/null"
-CMD [ "/usr/local/rbenv/plugins/ruby-build/install.sh" ]
+RUN chmod 755 /usr/local/rbenv/plugins/ruby-build/install.sh
+RUN runuser -l $APP_USER -c "/usr/local/rbenv/plugins/ruby-build/install.sh"
 RUN touch /etc/profile.d/rbenv.sh
 RUN echo "export PATH=\"/usr/local/rbenv/bin:\$PATH\"" >> /etc/profile.d/rbenv.sh
 RUN echo "eval \"\$(rbenv init -)\"" >> /etc/profile.d/rbenv.sh
-CMD [ ". /etc/profile.d/rbenv.sh" ]
+RUN apt-get install -yq bzip2 zlib1g-dev
 
 # redis
 RUN apt-get install -yq redis-server
