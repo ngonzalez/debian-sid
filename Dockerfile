@@ -120,5 +120,8 @@ RUN curl -fsSL https://git.io/JUETg -o /etc/filebeat/filebeat.yml
 RUN apt-get install -yq rsyslog
 RUN echo "*.* @@172.28.5.0:4000" > /etc/rsyslog.d/logstash.conf
 
+# solr
+RUN apt-get install -yq solr-jetty
+
 # system init
 CMD [ "/sbin/init" ]
