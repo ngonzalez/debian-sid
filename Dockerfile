@@ -105,5 +105,20 @@ RUN curl -fsSL https://git.io/JURWX -o /etc/redis/redis.conf
 RUN apt-get install -yq postgresql-12
 RUN echo "host all all 0.0.0.0/0 trust" >> /etc/postgresql/12/main/pg_hba.conf
 
+# elastic dependencies
+RUN apt-get install -yq openjdk-8-jdk wget gnupg
+RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+RUN apt-get install -yq apt-transport-https
+RUN echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list
+RUN apt-get update -yq
+
+# filebeat
+RUN apt-get install -yq filebeat
+RUN curl -fsSL https://git.io/JUETg -o /etc/filebeat/filebeat.yml
+
+# rsyslog
+RUN apt-get install -yq rsyslog
+RUN echo "*.* @@172.28.5.0:4000" > /etc/rsyslog.d/logstash.conf
+
 # system init
 CMD [ "/sbin/init" ]
