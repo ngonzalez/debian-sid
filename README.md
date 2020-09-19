@@ -17,7 +17,7 @@ docker build github.com/ngonzalez/debian-sid -t debian-sid \
 docker run -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
     --cap-add SYS_ADMIN \
     --network br0 \
-    --ip 172.28.5.0 \
+    --ip 172.28.5.1 \
     -p 192.168.1.10:2200:22 \
     debian-sid:latest
 ```
