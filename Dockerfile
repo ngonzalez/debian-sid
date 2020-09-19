@@ -110,6 +110,8 @@ RUN touch /etc/profile.d/rbenv.sh
 RUN echo "export PATH=\"/usr/local/rbenv/bin:\$PATH\"" >> /etc/profile.d/rbenv.sh
 RUN echo "eval \"\$(rbenv init -)\"" >> /etc/profile.d/rbenv.sh
 RUN apt-get install -yq bzip2 zlib1g-dev
+RUN rbenv install 2.7.1
+RUN rbenv global 2.7.1
 
 # redis
 RUN apt-get install -yq redis-server
