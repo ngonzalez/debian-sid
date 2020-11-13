@@ -89,7 +89,7 @@ RUN cp /home/$APP_USER/.ssh/id_host.pub /home/$APP_USER/.ssh/authorized_keys
 RUN chown -R $APP_USER: /home/$APP_USER/.ssh
 
 # ruby
-RUN apt-get install -yq ruby
+RUN apt-get install -yq ruby-dev
 
 # git
 RUN apt-get install -yq git-core
