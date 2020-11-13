@@ -23,10 +23,9 @@ docker run -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
 ```
 
 ```
-docker exec -it <container_name> /bin/bash
+docker exec -it <container_name> /bin/zsh
 ```
 
 ```
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name>
 ```
-
