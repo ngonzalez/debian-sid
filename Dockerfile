@@ -87,47 +87,10 @@ RUN echo " IdentityFile /home/$APP_USER/.ssh/id_host" >> /home/$APP_USER/.ssh/co
 RUN echo "$ssh_pub_key" > /home/$APP_USER/.ssh/id_host.pub
 RUN chmod 644 /home/$APP_USER/.ssh/id_host.pub
 
-RUN cp /home/$APP_USER/.ssh/id_host.pub /home/$APP_USER/.ssh/authorized_keys
+RUN echo "$ssh_pub_host" > /home/$APP_USER/.ssh/authorized_keys
+RUN chmod 600 /home/$APP_USER/.ssh/authorized_keys
 
 RUN chown -R $APP_USER: /home/$APP_USER/.ssh
-
-# ruby
-RUN apt-get install -yq ruby-dev
-
-# git
-RUN apt-get install -yq git-core
-RUN git config --global core.editor vim
-RUN git config --global core.pager less
-RUN curl -fsSL https://git.io/JURsx -o /home/$APP_USER/.gitconfig
-
-# redis
-RUN apt-get install -yq redis-server
-RUN curl -fsSL https://git.io/JURWX -o /etc/redis/redis.conf
-
-# PostgreSQL
-RUN apt-get install -yq postgresql-12
-RUN echo "host all all 0.0.0.0/0 trust" >> /etc/postgresql/12/main/pg_hba.conf
-
-# openjdk-8-jdk
-RUN apt-get install -yq openjdk-8-jdk
-
-# elastic dependencies
-RUN apt-get install -yq wget gnupg
-RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-RUN apt-get install -yq apt-transport-https
-RUN echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list
-RUN apt-get update -yq
-
-# filebeat
-RUN apt-get install -yq filebeat
-RUN curl -fsSL https://git.io/JUETg -o /etc/filebeat/filebeat.yml
-
-# rsyslog
-RUN apt-get install -yq rsyslog
-RUN echo "*.* @@172.28.5.0:4000" > /etc/rsyslog.d/logstash.conf
-
-# solr
-RUN apt-get install -yq solr-jetty
 
 # system init
 CMD [ "/sbin/init" ]
