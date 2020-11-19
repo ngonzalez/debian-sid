@@ -9,9 +9,9 @@ docker network create \
 
 ```
 docker build github.com/ngonzalez/debian-sid --no-cache -t debian-sid \
-    --build-arg ssh_pub_host="$(cat ~/.ssh/id_rsa.pub)" \
     --build-arg ssh_prv_key="$(cat ~/.ssh/debian-sid/id_rsa)" \
-    --build-arg ssh_pub_key="$(cat ~/.ssh/debian-sid/id_rsa.pub)"
+    --build-arg ssh_pub_key="$(cat ~/.ssh/debian-sid/id_rsa.pub)" \
+    --build-arg ssh_pub_host="$(cat ~/.ssh/id_rsa.pub)"
 ```
 
 ```
