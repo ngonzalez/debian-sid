@@ -47,8 +47,6 @@ RUN chmod 0600 /home/$APP_USER/.ssh/authorized_keys
 
 RUN chown -R $APP_USER: /home/$APP_USER/.ssh
 
-RUN service ssh start
-
 EXPOSE 22
 
 CMD [ "/usr/sbin/sshd","-eD" ]
