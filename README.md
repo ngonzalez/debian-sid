@@ -1,22 +1,16 @@
 #### build image
 ```
-docker build github.com/ngonzalez/debian-sid --no-cache -t ngonzalez121/debian-sid \
-    --build-arg ssh_pub_host="$(cat ~/.ssh/id_rsa.pub)"
+docker build ~/Sites/debian-sid \
+	-t ngonzalez121/debian-sid \
+	--build-arg ssh_pub_host="$(cat ~/.ssh/id_rsa.pub)" \
+	--no-cache
 ```
 
-#### create container
+#### push image to google container registry
 ```
-docker run -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
-    --cap-add SYS_ADMIN \
-    debian-sid:latest
+docker tag ngonzalez121/debian-sid gcr.io/hebe-001/debian-sid
 ```
 
-#### access container shell
 ```
-docker exec -it <container_name> /bin/zsh
-```
-
-#### get container IP address
-```
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name>
+docker push gcr.io/hebe-001/debian-sid
 ```

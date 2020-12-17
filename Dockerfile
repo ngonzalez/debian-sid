@@ -15,14 +15,6 @@ RUN apt-get install -yq debconf dialog libreadline8 libreadline-dev
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN dpkg-reconfigure debconf
 
-# systemd
-RUN apt-get install -yq systemd systemd-sysv
-FROM debian:${TAG}
-COPY --from=0 / /
-ENV container docker
-STOPSIGNAL SIGRTMIN+3
-VOLUME [ "/sys/fs/cgroup", "/run", "/run/lock" ]
-
 # APP_USER
 ENV APP_USER=debian
 RUN echo "APP_USER=$APP_USER" > /etc/profile.d/app_user.sh
@@ -30,6 +22,9 @@ RUN apt-get install -yq zsh
 RUN useradd -m $APP_USER -s /bin/zsh
 RUN apt-get install -yq sudo
 RUN echo "$APP_USER ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# ansible requirements
+RUN apt-get install -yq python3
 
 # ssh
 ARG ssh_pub_host
@@ -52,8 +47,8 @@ RUN chmod 0600 /home/$APP_USER/.ssh/authorized_keys
 
 RUN chown -R $APP_USER: /home/$APP_USER/.ssh
 
-# ansible requirements
-RUN apt-get install -yq python3
+RUN service ssh start
 
-# system init
-CMD [ "/sbin/init" ]
+EXPOSE 22
+
+CMD [ "/usr/sbin/sshd","-eD" ]

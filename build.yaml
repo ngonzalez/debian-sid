@@ -1,0 +1,16 @@
+---
+steps:
+- name: gcr.io/hebe-001/debian-sid
+  args:
+  - 'run'
+  - 'deploy'
+  - 'cloudrunservice'
+  - '--image'
+  - 'gcr.io/hebe-001/debian-sid:latest'
+  - '--region'
+  - 'europe-north1'
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
+  - '--port'
+  - '22'

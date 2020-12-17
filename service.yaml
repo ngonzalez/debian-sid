@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-loadbalancer
+  namespace: hebe
+spec:
+  type: LoadBalancer
+  selector:
+    run: debian-sid
+  ports:
+    - port: 8000
+      name: web
+      targetPort: 80
