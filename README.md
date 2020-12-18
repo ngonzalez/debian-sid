@@ -1,9 +1,6 @@
-#### config
+#### load config
 ```
-export IMAGE_TAG='ngonzalez121/debian-sid'
-export USER='debian'
-export HOST_KEY=$(cat ~/.ssh/id_rsa.pub)
-export PROJECT_NAME='hebe-001'
+source config.sh
 ```
 
 #### build image
@@ -30,14 +27,6 @@ docker push gcr.io/${PROJECT_NAME}/debian-sid
 
 ```
 gcloud container images list-tags gcr.io/${PROJECT_NAME}/debian-sid
-```
-
-#### load gcp config
-```
-export CLUSTER_NAME='app-cluster'
-export NAMESPACE='hebe'
-export REGION='europe-north1'
-export ZONE='europe-north1-a'
 ```
 
 #### create cluster
