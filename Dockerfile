@@ -47,6 +47,10 @@ RUN chmod 0600 /home/$APP_USER/.ssh/authorized_keys
 # change permissions to APP_USER
 RUN chown -R $APP_USER: /home/$APP_USER/.ssh
 
+# fix missing privilege separation directory
+RUN ssh-keygen -A
+RUN mkdir -p /run/sshd
+
 EXPOSE 22
 
 CMD [ "/usr/sbin/sshd","-eD" ]
