@@ -1,4 +1,4 @@
-#### source environment file
+#### load gcp config
 ```
 source gcp.sh
 ```
