@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: debian-sid
-        image: gcr.io/hebe-001/debian-sid:latest
+        image: gcr.io/hebe-001/debian-sid
         ports:
         - name: ssh
           containerPort: 22

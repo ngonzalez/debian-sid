@@ -10,5 +10,5 @@ spec:
     run: debian-sid
   ports:
     - port: 8000
-      name: web
+      name: nginx
       targetPort: 80

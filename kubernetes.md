@@ -1,19 +1,6 @@
 #### load gcp config
 ```
-source gcp.sh
-```
-
-#### push image to google container registry
-```
-docker tag ngonzalez121/debian-sid gcr.io/${PROJECT_NAME}/debian-sid
-```
-
-```
-docker push gcr.io/${PROJECT_NAME}/debian-sid
-```
-
-```
-gcloud container images list-tags gcr.io/${PROJECT_NAME}/debian-sid
+source config.sh
 ```
 
 #### create cluster
