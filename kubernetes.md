@@ -61,12 +61,3 @@ ssh -J <GCLOUD_USER>@<NODE_EXTERNAL_IP> <USER>@<POD_IP>
 ```
 ssh -o ProxyCommand='ssh -W %h:%p <GCLOUD_USER>@<NODE_EXTERNAL_IP>' <USER>@<POD_IP>
 ```
-
-#### format inventory
-```
-kubectl -n hebe get no -o json | jq -r '[.items[] | { name:.metadata.name, external_ip:.status.addresses[] | select(.type=="ExternalIP"), internal_ip:.status.addresses[] | select(.type=="InternalIP") }]'
-```
-
-```
-kubectl -n hebe get po -o json | jq -r '[.items[] | { name:.metadata.name, host_ip:.status.hostIP, pod_ip:.status.podIP }]'
-```
