@@ -27,7 +27,7 @@ docker push gcr.io/$PROJECT_NAME/debian-sid
 
 #### create cluster
 ```
-export CLUSTER_NAME='app-cluster'
+export CLUSTER_NAME='app'
 ```
 
 ```
@@ -44,7 +44,7 @@ gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $
 
 #### create namespace, deployment and service
 ```
-kubectl apply -f namespace.yaml
+kubectl apply -f yaml/namespace.yaml
 kubectl apply -f deploy-$CLUSTER_NAME.yaml
 kubectl apply -f service-$CLUSTER_NAME.yaml
 ```

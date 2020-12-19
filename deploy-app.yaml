@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-cluster-deployment
+  name: app
   namespace: hebe
 spec:
   selector:
