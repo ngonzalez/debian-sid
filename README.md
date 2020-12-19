@@ -27,7 +27,7 @@ docker push gcr.io/$PROJECT_NAME/debian-sid
 
 #### set cluster name
 ```
-export CLUSTER_NAME='kibana'
+export CLUSTER_NAME='app'
 ```
 
 #### create cluster
