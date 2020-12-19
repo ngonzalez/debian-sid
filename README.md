@@ -31,7 +31,7 @@ gcloud container images list-tags gcr.io/${PROJECT_NAME}/debian-sid
 
 #### create cluster
 ```
-gcloud container clusters create $CLUSTER_NAME --zone $ZONE
+gcloud container clusters create $CLUSTER_NAME --zone $ZONE --num-nodes 1
 ```
 
 #### get credentials
