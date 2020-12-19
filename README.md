@@ -18,20 +18,19 @@ docker push $IMAGE_TAG
 
 #### push to google container registry
 ```
-docker tag $IMAGE_TAG gcr.io/${PROJECT_NAME}/debian-sid
+docker tag $IMAGE_TAG gcr.io/$PROJECT_NAME/debian-sid
 ```
 
 ```
-docker push gcr.io/${PROJECT_NAME}/debian-sid
-```
-
-```
-gcloud container images list-tags gcr.io/${PROJECT_NAME}/debian-sid
+docker push gcr.io/$PROJECT_NAME/debian-sid
 ```
 
 #### create cluster
 ```
-gcloud container clusters create $CLUSTER_NAME --zone $ZONE --num-nodes 1
+gcloud container clusters create $CLUSTER_NAME \
+	--zone $ZONE \
+	--machine-type n1-standard-8 \
+	--num-nodes 1
 ```
 
 #### get credentials
