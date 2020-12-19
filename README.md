@@ -25,16 +25,22 @@ docker tag $IMAGE_TAG gcr.io/$PROJECT_NAME/debian-sid
 docker push gcr.io/$PROJECT_NAME/debian-sid
 ```
 
-#### create cluster
+#### set cluster name
 ```
-export CLUSTER_NAME='app'
+export CLUSTER_NAME='kibana'
 ```
 
+#### create cluster
 ```
 gcloud container clusters create $CLUSTER_NAME \
 	--zone $ZONE \
-	--machine-type n1-standard-4 \
+	--machine-type n1-standard-2 \
 	--num-nodes 1
+```
+
+#### create address for LoadBalancer
+```
+gcloud compute addresses create $CLUSTER_NAME --region $REGION
 ```
 
 #### get credentials
@@ -44,7 +50,7 @@ gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $
 
 #### create namespace, deployment and service
 ```
-kubectl apply -f yaml/namespace.yaml
+kubectl apply -f namespace.yaml
 kubectl apply -f deploy-$CLUSTER_NAME.yaml
 kubectl apply -f service-$CLUSTER_NAME.yaml
 ```
