@@ -11,6 +11,18 @@ docker build . -t $IMAGE_TAG \
 	--no-cache
 ```
 
+#### create container
+```
+docker run -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+	--cap-add SYS_ADMIN \
+	debian-sid:latest
+```
+
+#### access container shell
+```
+docker exec -it <CONTAINER> /bin/zsh
+```
+
 #### push to docker hub
 ```
 docker push $IMAGE_TAG
@@ -27,7 +39,7 @@ docker push gcr.io/$PROJECT_NAME/debian-sid
 
 #### set cluster name
 ```
-export CLUSTER_NAME='db'
+export CLUSTER_NAME='app'
 ```
 
 #### create cluster
