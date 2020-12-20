@@ -13,6 +13,11 @@ spec:
       labels:
         run: debian-sid
     spec:
+      volumes:
+      - name: cgroup
+        hostPath:
+          path: /sys/fs/cgroup
+          type: Directory
       containers:
       - name: debian-sid
         image: gcr.io/hebe-001/debian-sid
@@ -27,3 +32,10 @@ spec:
           containerPort: 12201
         - name: nginx
           containerPort: 8000
+        securityContext:
+          privileged: true
+          capabilities:
+            add: ["SYS_ADMIN"]
+        volumeMounts:
+        - name: cgroup
+          mountPath: /sys/fs/cgroup:ro
