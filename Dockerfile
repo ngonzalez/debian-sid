@@ -10,6 +10,19 @@ ENV TERM xterm-256color
 RUN apt-get update -yq
 RUN apt-get dist-upgrade -yq
 
+# debconf
+RUN apt-get install -yq debconf dialog libreadline8 libreadline-dev
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+RUN dpkg-reconfigure debconf
+
+# systemd
+RUN apt-get install -yq --no-install-recommends systemd systemd-sysv
+FROM debian:${TAG}
+COPY --from=0 / /
+ENV container docker
+STOPSIGNAL SIGRTMIN+3
+VOLUME [ "/sys/fs/cgroup", "/run", "/run/lock" ]
+
 # APP_USER
 ARG user
 ENV APP_USER="$user"
@@ -51,6 +64,7 @@ RUN chown -R $APP_USER: /home/$APP_USER/.ssh
 RUN ssh-keygen -A
 RUN mkdir -p /run/sshd
 
-EXPOSE 22
+# run ssh
+RUN /etc/init.d/ssh start
 
-CMD [ "/usr/sbin/sshd","-eD" ]
+CMD [ "/sbin/init" ]
