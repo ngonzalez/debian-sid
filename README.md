@@ -1,8 +1,3 @@
-#### load config
-```
-source config.sh
-```
-
 #### build image
 ```
 docker build . -t $IMAGE_TAG \
@@ -37,16 +32,24 @@ docker tag $IMAGE_TAG gcr.io/$PROJECT_NAME/debian-sid
 docker push gcr.io/$PROJECT_NAME/debian-sid
 ```
 
-#### set cluster name
+#### gcloud
 ```
-export CLUSTER_NAME='app'
+gcloud auth login --no-launch-browser
+```
+
+```
+gcloud config set account $SERVICE_ACCOUNT
+```
+
+```
+gcloud config set project $PROJECT_NAME
 ```
 
 #### create cluster
 ```
 gcloud container clusters create $CLUSTER_NAME \
 	--zone $ZONE \
-	--machine-type n1-standard-2 \
+	--machine-type $MACHINE_TYPE \
 	--num-nodes 1
 ```
 
@@ -86,12 +89,19 @@ kubectl -n $NAMESPACE describe services
 #### ssh into pod
 ```
 gcloud compute ssh --zone $ZONE <NODE> --project $PROJECT_NAME --container=<POD>
+# gcloud compute ssh --zone $ZONE ngonzalez@gke-app-default-pool-4e6b9dde-mgtk --project $PROJECT_NAME --container=bb554b07995d
 ```
 
 ```
 ssh -J <GCLOUD_USER>@<NODE_EXTERNAL_IP> <USER>@<POD_IP>
+# ssh -J ngonzalez@35.228.15.33 debian@10.108.0.10
 ```
 
 ```
 ssh -o ProxyCommand='ssh -W %h:%p <GCLOUD_USER>@<NODE_EXTERNAL_IP>' <USER>@<POD_IP>
+```
+
+#### update gcloud
+```
+gcloud components update
 ```

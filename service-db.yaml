@@ -6,10 +6,13 @@ metadata:
   namespace: hebe
 spec:
   type: LoadBalancer
-  loadBalancerIP: 35.228.154.9
+  loadBalancerIP: 35.228.89.212
   selector:
     run: debian-sid
   ports:
+    - port: 22
+      name: ssh
+      targetPort: 22
     - port: 5432
       name: postgresql
       targetPort: 5432
