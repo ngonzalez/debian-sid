@@ -54,6 +54,11 @@ kubectl apply -f service.yaml
 gcloud compute addresses list $CLUSTER_NAME
 ```
 
+#### delete address for LoadBalancer
+```
+gcloud compute addresses delete $CLUSTER_NAME --region $REGION
+```
+
 #### create address for LoadBalancer
 ```
 gcloud compute addresses create $CLUSTER_NAME --region $REGION

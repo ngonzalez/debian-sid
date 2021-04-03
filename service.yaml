@@ -8,7 +8,7 @@ spec:
   type: LoadBalancer
   loadBalancerIP: 35.228.89.212
   selector:
-    run: debian-effilab
+    run: debian
   ports:
     - port: 22
       name: ssh
