@@ -44,8 +44,8 @@ gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $
 #### create namespace, deployment and service
 ```
 kubectl apply -f namespace.yaml
-kubectl apply -f deploy-$CLUSTER_NAME.yaml
-kubectl apply -f service-$CLUSTER_NAME.yaml
+kubectl apply -f deploy.yaml
+kubectl apply -f service.yaml
 ```
 
 
@@ -78,12 +78,12 @@ kubectl -n $NAMESPACE describe services
 #### ssh into pod
 ```
 gcloud compute ssh --zone $ZONE <NODE> --project $PROJECT_NAME --container=<POD>
-# gcloud compute ssh --zone $ZONE ngonzalez@gke-kibana-default-pool-5ab116d9-hzm2 --project $PROJECT_NAME --container=9ae345edd61a
+# gcloud compute ssh --zone $ZONE ngonzalez@gke-app-default-pool-934a4208-fdwj --project $PROJECT_NAME --container=67092bf47844
 ```
 
 ```
 ssh -J <GCLOUD_USER>@<NODE_EXTERNAL_IP> <USER>@<POD_IP>
-# ssh -J ngonzalez@35.228.15.33 debian@10.108.0.19
+# ssh -J ngonzalez@35.228.245.113 debian@10.76.0.9
 ```
 
 ```
