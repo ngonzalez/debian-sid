@@ -6,7 +6,7 @@ metadata:
   namespace: effilab
 spec:
   type: LoadBalancer
-  loadBalancerIP: 35.228.85.147
+  loadBalancerIP: 35.228.89.212
   selector:
     run: debian-effilab
   ports:

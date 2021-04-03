@@ -83,7 +83,7 @@ gcloud compute ssh --zone $ZONE <NODE> --project $PROJECT_NAME --container=<POD>
 
 ```
 ssh -J <GCLOUD_USER>@<NODE_EXTERNAL_IP> <USER>@<POD_IP>
-# ssh -J ngonzalez@35.228.15.33 debian@10.111.242.18
+# ssh -J ngonzalez@35.228.15.33 debian@10.108.0.19
 ```
 
 ```
