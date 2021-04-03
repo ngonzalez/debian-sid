@@ -13,9 +13,21 @@ spec:
       labels:
         run: debian
     spec:
+      volumes:
+      - name: cgroup
+        hostPath:
+          path: /sys/fs/cgroup
+          type: Directory
       containers:
       - name: debian
-        image: gcr.io/hebe-299715/debian
+        image: gcr.io/hebe-299715/debian-effilab
         ports:
         - name: ssh
           containerPort: 22
+        securityContext:
+          privileged: true
+          capabilities:
+            add: ["SYS_ADMIN"]
+        volumeMounts:
+        - name: cgroup
+          mountPath: /sys/fs/cgroup:ro

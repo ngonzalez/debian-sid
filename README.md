@@ -6,24 +6,9 @@ docker build . -t $IMAGE_TAG \
 	--no-cache
 ```
 
-#### create container
-```
-docker run -it debian:latest
-```
-
-#### access container shell
-```
-docker exec -it <CONTAINER> /bin/zsh
-```
-
-#### push to docker hub
-```
-docker push $IMAGE_TAG
-```
-
 #### push to google container registry
 ```
-docker tag $IMAGE_TAG gcr.io/$PROJECT_NAME/debian
+docker tag $IMAGE_TAG gcr.io/$PROJECT_NAME/$IMAGE_TAG
 ```
 
 ```
@@ -93,12 +78,12 @@ kubectl -n $NAMESPACE describe services
 #### ssh into pod
 ```
 gcloud compute ssh --zone $ZONE <NODE> --project $PROJECT_NAME --container=<POD>
-# gcloud compute ssh --zone $ZONE ngonzalez@gke-app-default-pool-4e6b9dde-mgtk --project $PROJECT_NAME --container=bb554b07995d
+# gcloud compute ssh --zone $ZONE ngonzalez@gke-kibana-default-pool-5ab116d9-hzm2 --project $PROJECT_NAME --container=9ae345edd61a
 ```
 
 ```
 ssh -J <GCLOUD_USER>@<NODE_EXTERNAL_IP> <USER>@<POD_IP>
-# ssh -J ngonzalez@35.228.15.33 debian@10.108.0.10
+# ssh -J ngonzalez@35.228.15.33 debian@10.111.242.18
 ```
 
 ```
