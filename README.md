@@ -8,9 +8,7 @@ docker build . -t $IMAGE_TAG \
 
 #### create container
 ```
-docker run -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
-	--cap-add SYS_ADMIN \
-	debian-sid:latest
+docker run -it debian:latest
 ```
 
 #### access container shell
@@ -25,11 +23,11 @@ docker push $IMAGE_TAG
 
 #### push to google container registry
 ```
-docker tag $IMAGE_TAG gcr.io/$PROJECT_NAME/debian-sid
+docker tag $IMAGE_TAG gcr.io/$PROJECT_NAME/debian
 ```
 
 ```
-docker push gcr.io/$PROJECT_NAME/debian-sid
+docker push gcr.io/$PROJECT_NAME/$IMAGE_TAG
 ```
 
 #### gcloud
