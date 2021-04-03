@@ -53,11 +53,6 @@ gcloud container clusters create $CLUSTER_NAME \
 	--num-nodes 1
 ```
 
-#### create address for LoadBalancer
-```
-gcloud compute addresses create $CLUSTER_NAME --region $REGION
-```
-
 #### get credentials
 ```
 gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME
@@ -68,6 +63,17 @@ gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $
 kubectl apply -f namespace.yaml
 kubectl apply -f deploy-$CLUSTER_NAME.yaml
 kubectl apply -f service-$CLUSTER_NAME.yaml
+```
+
+
+#### list addresses for LoadBalancer
+```
+gcloud compute addresses list $CLUSTER_NAME
+```
+
+#### create address for LoadBalancer
+```
+gcloud compute addresses create $CLUSTER_NAME --region $REGION
 ```
 
 #### get informations
