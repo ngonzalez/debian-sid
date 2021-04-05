@@ -6,7 +6,7 @@ metadata:
   namespace: hebe
 spec:
   type: LoadBalancer
-  loadBalancerIP: 35.228.79.139
+  loadBalancerIP: DB_CLUSTER_IP
   selector:
     run: debian-sid
   ports:
