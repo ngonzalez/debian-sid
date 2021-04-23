@@ -7,7 +7,7 @@ ENV RUNLEVEL 1
 ENV TERM xterm-256color
 
 # apt
-RUN echo 'deb http://ftp.plusline.net/debian/ testing main contrib non-free' > /etc/apt/sources.list
+RUN echo 'deb http://ftp.plusline.net/debian/ unstable main contrib non-free' > /etc/apt/sources.list
 RUN apt-get update -yq
 RUN apt-get dist-upgrade -yq
 
