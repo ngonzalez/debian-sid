@@ -11,6 +11,11 @@ RUN echo 'deb http://ftp.plusline.net/debian/ testing main contrib non-free' > /
 RUN apt-get update -yq
 RUN apt-get dist-upgrade -yq
 
+# debconf
+RUN apt-get install -yq debconf dialog libreadline8 libreadline-dev
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+RUN dpkg-reconfigure debconf
+
 # systemd
 RUN apt-get install -yq --no-install-recommends systemd systemd-sysv
 FROM debian:${TAG}
